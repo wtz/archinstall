@@ -2,8 +2,6 @@
 
 This is a bash based Arch Linux installation script with EFI boot loader and btrfs partition prepared for Timeshift or snapper.
 
-[![Watch on YouTube](https://img.youtube.com/vi/uskzgcyGAOE/0.jpg)](https://www.youtube.com/watch?v=uskzgcyGAOE)
-
 Install Arch Linux YOUR WAY. Arch Linux Installation 2023
 https://youtu.be/uskzgcyGAOE
 
@@ -85,8 +83,13 @@ sudo rsync -avrh --progress /home/ /mnt/backup/
 如果以btrf 文件系统安装不成功的话，改成ext4文件系统试下！
 
 
-# 关于USB烧录成系统盘后无法在win系统下识别解决办法：
-
+# 关于USB烧录成系统盘后无法在win系统下识别解决办法： 
+1. 将u盘插入系统；
+2. 打开cmd 输入： diskpart
+3. 找到U盘符，执行 select disk xx （xx为你U盘的）
+4. 执行clean 即可；
+5. 然后在磁盘管理器找到U盘，新建简单卷 即可；
+6. 然后系统就可以对它进行格式化了；
 
 
 
