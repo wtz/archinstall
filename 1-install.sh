@@ -48,11 +48,11 @@ btrfs su cr /mnt/@log
 umount /mnt
 
 mount -o compress=zstd:1,noatime,subvol=@ /dev/sda2 /mnt
-mkdir -p /mnt/{boot/efi,home,.snapshots,var/{cache,log}}
-mount -o compress=zstd:1,noatime,subvol=@cache /dev/sda2 /mnt/var/cache
-mount -o compress=zstd:1,noatime,subvol=@home /dev/sda2 /mnt/home
-mount -o compress=zstd:1,noatime,subvol=@log /dev/sda2 /mnt/var/log
-mount -o compress=zstd:1,noatime,subvol=@snapshots /dev/sda2 /mnt/.snapshots
+mkdir -p /mnt/{boot/efi,boot/grub,home,.snapshots,var/{cache,log}}
+mount -o compress=zstd:1,discard=async,noatime,subvol=@cache /dev/sda2 /mnt/var/cache
+mount -o compress=zstd:1,discard=async,noatime,subvol=@home /dev/sda2 /mnt/home
+mount -o compress=zstd:1,discard=async,noatime,subvol=@log /dev/sda2 /mnt/var/log
+mount -o compress=zstd:1,discard=async,noatime,subvol=@snapshots /dev/sda2 /mnt/.snapshots
 mount /dev/sda1 /mnt/boot/efi
 # mkdir /mnt/vm
 # mount /dev/$sda3 /mnt/vm
