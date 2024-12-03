@@ -35,6 +35,10 @@ gdisk /dev/sda
 # 然后创建分区3 /dev/sda3 分配 2G （用户虚拟内存）
 # 最后创建分区2 /dev/sda2  剩下空间 放系统的
 
+# 更新镜像
+vim /etc/pacman.d/mirrlist
+# 搜索 /China  找一个中国的镜像源 放到最前面 然后保存
+
 # Sync package
 pacman -Syy
 
@@ -46,8 +50,14 @@ pacman -Syy
 # Install git
 pacman -S git
 
-# Clone Installation
+# Clone Installation 
 git clone https://github.com/wtz/archinstall.git
+
+#如果网络原因无法访问github，clone下来，可以安装wget 和 unzip
+#然后在局域网的另外一台电脑下载，将相关文件搞成zip，在另外一台电脑上起个nodeserver
+#然后通过wget下载即可
+
+
 cd archinstall
 
 # Start the script
