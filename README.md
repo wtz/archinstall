@@ -67,3 +67,14 @@ After the installation you will find additional scripts in your home folder to i
 
 Please also check out the dotfiles to configure qtile and several other applications.
 
+
+# 备份
+首先运行 pacman -Qe，这个命令可以列出系统中所有手动指定安装的包，运行 pacman -Qe >> list.txt 可以将这个软件包名单保存到 list.txt 文件里面，再将这个文件保存到方便查看的地方，比如自己的手机里什么的，方便重装后参照这个名单将软件装回来。
+
+之后是备份整个家目录，以便重装完后恢复绝大多数的个人数据。我找到一个闲置的空的移动硬盘，不是空的也没关系，只要剩余空间够放下家目录的内容就行，将其挂载在 /mnt 目录下，并新建一个空文件夹 backup。为了在恢复数据时保留所有文件的权限，我使用 rsync 命令：
+
+sudo rsync -avrh --progress /home/ /mnt/backup/
+这个命令会将所有家目录中的文件同步至 /mnt/backup/ 路径下。选项 -avrh 可以在复制时保留文件的权限，/home/ 是需要备份的目录，/mnt/backup/ 是备份的目标目录，一定要注意路径最后的斜杠，路径最后是否有斜杠对于 rsync 命令来说是完全不同的两个路径，这里在路径最后加上了斜杠，之后再用 rsync 恢复数据时也需要在路径后面加上斜杠。
+
+可以参照https://sspai.com/post/78916 这篇文章
+
