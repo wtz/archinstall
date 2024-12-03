@@ -33,6 +33,9 @@ gdisk /dev/sda
 # Partition 3: +2G (for swap)
 # Partition 2: Available space 8300 (for Linux filesystem)
 # Write w, Confirm Y
+# 用gdisk 工具先创建分区1即为/dev/sda1，分配500MB容量；
+# 然后创建分区3 /dev/sda3 分配 2G （用户虚拟内存）
+# 最后创建分区2 /dev/sda2  剩下空间 放系统的
 
 # Sync package
 pacman -Syy
@@ -61,7 +64,6 @@ Please note that the scripts in folder /optional are not tested yet.
 After the installation you will find additional scripts in your home folder to install
 
 - yay aur helper
-- zram swap file
 - timeshift snapshots
 - preload application cache
 
@@ -77,4 +79,14 @@ sudo rsync -avrh --progress /home/ /mnt/backup/
 这个命令会将所有家目录中的文件同步至 /mnt/backup/ 路径下。选项 -avrh 可以在复制时保留文件的权限，/home/ 是需要备份的目录，/mnt/backup/ 是备份的目标目录，一定要注意路径最后的斜杠，路径最后是否有斜杠对于 rsync 命令来说是完全不同的两个路径，这里在路径最后加上了斜杠，之后再用 rsync 恢复数据时也需要在路径后面加上斜杠。
 
 可以参照https://sspai.com/post/78916 这篇文章
+
+
+-------
+如果以btrf 文件系统安装不成功的话，改成ext4文件系统试下！
+
+
+# 关于USB烧录成系统盘后无法在win系统下识别解决办法：
+
+
+
 
