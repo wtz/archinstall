@@ -63,6 +63,9 @@ cd archinstall
 # Start the script
 ./1-install.sh
 
+# 1-install.sh 命令执行成功后，在手动执行： 
+sh ./2-configuration.sh 
+
 ```
 
 ## Additional information
