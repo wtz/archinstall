@@ -17,10 +17,10 @@ echo ""
 # ------------------------------------------------------
 # Enter partition names
 # ------------------------------------------------------
-# lsblk
-# read -p "Enter the name of the EFI partition (eg. sda1): " sda1
-# read -p "Enter the name of the ROOT partition (eg. sda2): " sda2
-# read -p "Enter the name of the VM partition (keep it empty if not required): " sda3
+lsblk
+read -p "Enter the name of the EFI partition (eg. sda1): " sda1
+read -p "Enter the name of the home partition (eg. sda2): " sda2
+read -p "Enter the name of the swap partition (keep it empty if not required): " sda3
 
 # ------------------------------------------------------
 # Sync time
@@ -30,16 +30,16 @@ timedatectl set-ntp true
 # ------------------------------------------------------
 # Format partitions
 # ------------------------------------------------------
-mkfs.fat -F 32 /dev/sda1
-mkfs.btrfs -f /dev/sda2
-mkswap /dev/sda3
-swapon /dev/sda3
+mkfs.fat -F 32 /dev/$sda1
+mkfs.btrfs -f /dev/$sda2
+mkswap /dev/$sda3
+swapon /dev/$sda3
 
 
 # ------------------------------------------------------
 # Mount points for btrfs
 # ------------------------------------------------------
-mount /dev/sda2 /mnt
+mount /dev/$sda2 /mnt
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@cache
 btrfs su cr /mnt/@home
@@ -47,13 +47,13 @@ btrfs su cr /mnt/@snapshots
 btrfs su cr /mnt/@log
 umount /mnt
 
-mount -o compress=zstd:1,noatime,subvol=@ /dev/sda2 /mnt
+mount -o compress=zstd:1,noatime,subvol=@ /dev/$sda2 /mnt
 mkdir -p /mnt/{boot/efi,boot/grub,home,.snapshots,var/{cache,log}}
-mount -o compress=zstd:1,discard=async,noatime,subvol=@cache /dev/sda2 /mnt/var/cache
-mount -o compress=zstd:1,discard=async,noatime,subvol=@home /dev/sda2 /mnt/home
-mount -o compress=zstd:1,discard=async,noatime,subvol=@log /dev/sda2 /mnt/var/log
-mount -o compress=zstd:1,discard=async,noatime,subvol=@snapshots /dev/sda2 /mnt/.snapshots
-mount /dev/sda1 /mnt/boot/efi
+mount -o compress=zstd:1,discard=async,noatime,subvol=@cache /dev/$sda2 /mnt/var/cache
+mount -o compress=zstd:1,discard=async,noatime,subvol=@home /dev/$sda2 /mnt/home
+mount -o compress=zstd:1,discard=async,noatime,subvol=@log /dev/$sda2 /mnt/var/log
+mount -o compress=zstd:1,discard=async,noatime,subvol=@snapshots /dev/$sda2 /mnt/.snapshots
+mount /dev/$sda1 /mnt/boot/efi
 # mkdir /mnt/vm
 # mount /dev/$sda3 /mnt/vm
 
