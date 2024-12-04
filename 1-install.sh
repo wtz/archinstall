@@ -82,5 +82,6 @@ cp snapshot.sh /mnt/archinstall/
 # ------------------------------------------------------
 # Chroot to installed sytem
 # ------------------------------------------------------
-arch-chroot /mnt ./archinstall/2-configuration.sh
+#arch-chroot /mnt ./archinstall/2-configuration.sh （这一步，要改下手动执行2-configuration.sh）
+arch-chroot /mnt
 
