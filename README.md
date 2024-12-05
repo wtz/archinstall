@@ -81,6 +81,11 @@ After the installation you will find additional scripts in your home folder to i
 Please also check out the dotfiles to configure qtile and several other applications.
 
 
+# 关于系统安装后yay无法安装的问题
+sudo pacman -S clash 
+安装这个解决网络的问题后，可以安装yay
+
+
 # 备份
 首先运行 pacman -Qe，这个命令可以列出系统中所有手动指定安装的包，运行 pacman -Qe >> list.txt 可以将这个软件包名单保存到 list.txt 文件里面，再将这个文件保存到方便查看的地方，比如自己的手机里什么的，方便重装后参照这个名单将软件装回来。
 
